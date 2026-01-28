@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
 import os
+import uuid
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -38,10 +39,7 @@ user_input = st.text_area(
 # ----------------------------------------
 # Langflow Configuration
 # ----------------------------------------
-LANGFLOW_URL = (
-    "https://api.langflow.astra.datastax.com/"
-    "lf/<YOUR_FLOW_ID>/api/v1/run/<YOUR_ENDPOINT_ID>"
-)
+LANGFLOW_URL = "https://aws-us-east-2.langflow.datastax.com/lf/2b623abf-bd2c-4243-b7ce-b484c789a5c8/api/v1/run/22a70603-dfae-4579-b10d-5b8a25960d86"
 
 LANGFLOW_TOKEN = os.getenv("LANGFLOW_API_TOKEN")
 
@@ -50,8 +48,10 @@ if not LANGFLOW_TOKEN:
     st.stop()
 
 headers = {
+    "X-DataStax-Current-Org": "0c333d35-2a11-4820-ab29-6f2df1eeb942",
     "Authorization": f"Bearer {LANGFLOW_TOKEN}",
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    "Accept": "application/json"
 }
 
 # ----------------------------------------
@@ -65,7 +65,8 @@ if st.button("Analyze Adherence"):
     payload = {
         "input_value": user_input,
         "input_type": "chat",
-        "output_type": "chat"
+        "output_type": "chat",
+        "session_id": str(uuid.uuid4())
     }
 
     with st.spinner("Analyzing adherence behavior..."):
