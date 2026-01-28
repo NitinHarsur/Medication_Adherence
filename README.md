@@ -80,10 +80,6 @@ This application leverages **IBM Granite Model** through **LangFlow** to analyze
 
 This system is **assistive only** and is **not intended for diagnostic purposes**. Always consult healthcare professionals for medical advice.
 
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## 👥 Team
+##  Team
 
 Built for the IBM Hackathon 2026
