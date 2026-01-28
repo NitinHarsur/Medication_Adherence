@@ -75,7 +75,7 @@ if st.button("Analyze Adherence"):
                 LANGFLOW_URL,
                 headers=headers,
                 json=payload,
-                timeout=60
+                timeout=120  # Increased timeout for cold starts
             )
             response.raise_for_status()
             data = response.json()
